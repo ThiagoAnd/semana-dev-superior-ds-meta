@@ -5,7 +5,6 @@ import './styles.css'
 function NotificationButton() {
     return (
         <>
-        teste
         <div className="dsmeta-red-btn">
             <img src={icon} alt="Notificar" />
         </div>
