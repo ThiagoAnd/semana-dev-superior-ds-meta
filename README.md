@@ -1,5 +1,5 @@
 # semana-dev-superior-ds-meta
-⚡ Aplicação DS META feita na semana dev superior
+⚡ Aplicação DS META feita na semana dev superior utilizando React + spring boot
 
 ## Link para o repositorio devsuperior: 
 https://github.com/devsuperior/sds-dsmeta
