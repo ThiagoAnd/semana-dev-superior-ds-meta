@@ -14,6 +14,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 //Classe feita para não ocorrer o erro de CORS. No curso foi utilizado o antigo Heroku para subir a aplicação Java, e o front será feito em outro lugar, então
 // foi utilizado essa config para não ocorrer erro na comunicação.
+//Tirei a config e comprovei no react que não acessa, igual ao erro do hybrid flow bv
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
