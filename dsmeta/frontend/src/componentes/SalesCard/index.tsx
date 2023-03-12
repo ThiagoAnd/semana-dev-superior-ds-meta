@@ -9,24 +9,31 @@ import './styles.css'
 import { Sale } from '../../models/sale';
 
 function SalesCard() {
-    //nome da variavel, funcao que muda ela = recebe um tipo useState  do react hook que tem valor inicial de new date
-    const [minDate, batata] = useState(new Date());
-    const [maxDate, setMaxDate] = useState(new Date());
+    //nome da variavel, funcao que muda ela = recebe um tipo useState  do react hook que tem valor inicial de uma variavel criada
+    const min = new Date(new Date().setDate(new Date().getDate() - 365));
+    const max = new Date();
+
+    const [minDate, batata] = useState(min);
+    const [maxDate, setMaxDate] = useState(max);
     //useState tipado como lista de sales e valor inicial é lista vazia
     const [sales, setarVendas] = useState<Sale[]>([]);
     //função'() => ' e lista de dependencias '[]'
     // Em DES O useEffect é executado 2 vezes por padrão na primeira vez
     useEffect(() => {
-        console.log("Quando acontece uma mudança o useEffect é executado")
+        // console.log("Quando acontece uma mudança o useEffect é executado")
         //Para usar o axios foi só importar com o yarn e usar 
         // axios.get("http://localhost:8081/sales")
-        axios.get(`${BASE_URL}/sales`)
+        const dmin = minDate.toISOString().slice(0,10);
+        const dmax = maxDate.toISOString().slice(0,10);
+
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(resposta => {
                 // console.log(resposta.data)
                 setarVendas(resposta.data.content);
 
             })
-    }, [])
+    }, [minDate,maxDate])
+    //Nesse [minDate,maxDate] vc diz ao useEffect para sempre rodar quando alguma dessas variaveis mudar
 
     return (
         <>
@@ -79,7 +86,7 @@ function SalesCard() {
                                         <td>R$ {s.amount.toFixed(2)}</td>
                                         <td>
                                             <div className="dsmeta-red-btn-container">
-                                                <NotificationButton />
+                                                <NotificationButton saleId={s.id}/>
                                             </div>
                                         </td>
                                     </tr>
